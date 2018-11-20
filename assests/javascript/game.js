@@ -8,50 +8,49 @@ var letterArray = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
 var winNumber = 0;
 var lossNumber = 0;
 var guessNumber = 9;
-var guessedLetters = [];
+var guessedLetters = []; 
 
 
 //Comp picks a random letter       
-
 var randomLetter = letterArray[Math.floor(Math.random() * letterArray.length)];
-
-console.log(randomLetter)
+console.log(randomLetter);
 
 //Function - on key press, log key and
-document.onkeypress = function(event) {
+document.onkeypress = function (event) {
     var userGuess = event.key;
 
-   
-//Update the user input array    
+    //Update the user input array    
     guessedLetters.push(userGuess);
 
-//If user guesses the right letter win count goes up, guess number resets to 9, user guess array is emptied    
-    if(userGuess === randomLetter){
+    //If user guesses the right letter win count goes up, guess number resets to 9, user guess array is emptied    
+    if (userGuess === randomLetter) {
         winNumber++;
         guessNumber = 9;
         guessedLetters = [];
-        document.getElementById('wins').innerHTML = "Wins: " + winNumber;
-               
-        
-//If user guess is wrong the guess number goes down    
-    }else{
+        resetGame();
+
+    //If user guess is wrong the guess number goes down    
+    } else {
         guessNumber--;
-        document.getElementById('guesses').innerHTML = "Guesses left: " + guessNumber;
     }
-//Once the guess number hits 0 the loss number goes up by one, and the guess number and user guess array are reset
-    if(guessNumber === 0){
-        lossNumber++
+
+    //Once the guess number hits 0 the loss number goes up by one, and the guess number and user guess array are reset
+    if (guessNumber === 0) {
+        lossNumber++;
         guessNumber = 9;
         guessedLetters = [];
-        document.getElementById('losses').innerHTML = "losses: " + lossNumber;
-
-       
+        resetGame();
     }
-//Prints everyhing to index file
+
+    //Prints everyhing to index file
     document.getElementById('wins').innerHTML = "Wins: " + winNumber;
     document.getElementById('losses').innerHTML = "losses: " + lossNumber;
     document.getElementById('guesses').innerHTML = "Guesses left: " + guessNumber;
     document.getElementById('guessedLetters').innerHTML = "Guessed letters: " + guessedLetters;
 
+}
+
+function resetGame(){
+    var randomLetter = letterArray[Math.floor(Math.random() * letterArray.length)];
+    console.log(randomLetter);
 } 
-   
